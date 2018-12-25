@@ -585,7 +585,8 @@
                 console.log(name + "," + story + "," + ra + "," + dec + "," + mag + "," + id);
                 
                 // for testing
-                starNotary.checkIfStarExist("1", "1", "1", function(error, result) {
+                //starNotary.checkIfStarExist.sendTransaction("1", "1", "1", {gas: 400000, gasPrice: 20000000000}, function(error, result) {
+                starNotary.checkIfStarExist.sendTransaction(ra, dec, mag, {gas: 400000, gasPrice: 20000000000}, function(error, result) {
                     if (!error) {
                         console.log("works fine");
                     }
@@ -594,7 +595,7 @@
                     }
                 })
 
-                starNotary.createStar(name, story, ra, dec, mag, id, {gas: 400000, gasPrice: 20000000000}, 
+                starNotary.createStar.sendTransaction(name, story, ra, dec, mag, parseInt(id), {gas: 400000, gasPrice: 20000000000}, 
                 function(error, result) {
                     if (!error) {
                         document.getElementById('star-creation-result').innerText = "success."
@@ -611,7 +612,7 @@
                 var idToPutup = document.getElementById("star-id-putup").value;
                 var price = document.getElementById("star-price").value;
                 
-                starNotary.putStarUpForSale(idToPutup, price, function(error, result) {
+                starNotary.putStarUpForSale(parseInt(idToPutup), parseInt(price), function(error, result) {
                     if (!error) {
                         document.getElementById('star-putup').innerText = result;
                     } else { 
@@ -625,7 +626,7 @@
             function lookupButtonClicked() {
                 var idToLookup = document.getElementById("star-id-lookup").value;
 
-                starNotary.tokenIdToStarInfo(idToLookup, function(error, result) {
+                starNotary.tokenIdToStarInfo(parseInt(idToLookup), function(error, result) {
                     if (!error) {
                         document.getElementById('star-found').innerText = result;
                     } else { 
